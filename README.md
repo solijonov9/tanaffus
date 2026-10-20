@@ -86,17 +86,20 @@ Natija: `portable/cyber-university.html`. Tayyor HTML fayli kompyuterga olingach
 
 Sayt manzili: **https://solijonov9.github.io/tanaffus/**. O‘qish ko‘rinishi shu manzilda, taqdimot `#/taqdimot/1` holatida ochiladi. QR va chop etiladigan qo‘llanma shu manzilni ishlatadi.
 
-Tayyor sayt `gh-pages` tarmog‘ining ildiziga joylashtiriladi. GitHub repozitoriysida **Settings → Pages → Build and deployment → Deploy from a branch → gh-pages → / (root) → Save** tanlanadi. GitHub saytni birinchi marta tayyorlashi bir necha daqiqa olishi mumkin. GitHub Pages yoqilmagan bo‘lsa, faqat fayllarni yuklash hali sayt ochilganini anglatmaydi.
+GitHub nashr yozuvlariga ko‘ra, mavjud Pages manbasi `codex/cyber-university-seminar` tarmog‘ining ildizidir. Shu sababli ildizdagi `index.html` — barcha aktivlari ichki joylashtirilgan tayyor sayt. `.nojekyll` fayli uni statik nashr sifatida belgilaydi. Qo‘lda sozlash zarur bo‘lsa: **Settings → Pages → Deploy from a branch → codex/cyber-university-seminar → / (root) → Save**.
 
-Yangilangan saytni chiqarish:
+Tahrirlanadigan Vite HTML kirish fayli — **`seminar-source.html`**. `vite.config.js` uni dev-serverda va yig‘ishda ishlatadi; hosil qilingan `index.html`ni qo‘lda tahrirlamang. Komponentlar `src/` ichida qoladi.
 
-```sh
-npm run deploy:pages
-```
+Yangilash tartibi:
 
-Buyruq saytni yig‘adi va faqat `gh-pages` tarmog‘iga yuboradi. Alohida vaqtinchalik Git indeksi ishlatiladi; manba fayllari va joriy tarmoq almashtirilmaydi. Mavjud nashrning tarixi saqlanadi; kuch bilan yozish ishlatilmaydi. GitHub’ga yozish huquqi kerak. `node scripts/deploy-pages.mjs --dry-run` GitHub’ni o‘zgartirmasdan tayyorgarlikni tekshiradi.
+1. Manba o‘zgarishlarini commit qiling.
+2. `npm run deploy:pages` buyrug‘ini bajaring.
+3. GitHub’dagi **Actions → pages build and deployment** nashrini tekshiring.
 
-`tests/pages.spec.js` yig‘ilgan saytni aynan `/tanaffus/` ichida ochib, 14 slayd, aktivlar, mobil navigatsiya, vazifa–taqvim bog‘lanishi, QR va bitta HTML eksportini tekshiradi.
+Buyruq yangi yig‘ish va bitta HTML eksportini yaratadi, faqat hosil qilingan HTML fayllarini zarur bo‘lsa commit qiladi va mavjud Pages manba tarmog‘ini yangilaydi. Boshqa manba o‘zgarishlari commit qilinmagan bo‘lsa nashrni to‘xtatadi; kuch bilan yozish ishlatilmaydi. GitHub’ga yozish huquqi kerak.
 
+Muqobil `gh-pages` tarmog‘iga ham tayyor yig‘ish joylashtirilgan, lekin mavjud Pages manbasi yuqoridagi `codex/cyber-university-seminar` tarmog‘idir.
+
+`tests/pages.spec.js` yig‘ilgan saytni aynan `/tanaffus/` ichida ochib, 14 slayd, aktivlar, mobil navigatsiya, vazifa–taqvim bog‘lanishi, QR, bitta HTML eksporti va GitHub’da bevosita xizmat qilinadigan ildiz HTML faylini tekshiradi.
 
 Taqdimot va qo‘llanmaning yuklab olinadigan PDF nusxalarini yangi QR manzili bilan qayta yaratish uchun `npm run export:materials` ishlatiladi. Bu buyruq Chromium va Python/PyMuPDF talab qiladi; natijalar `downloads/` ichiga yoziladi. Saytning o‘zi PDF eksporti uchun server yoki ushbu vositalarni talab qilmaydi — foydalanuvchi brauzerning chop etish dialogidan foydalanadi.

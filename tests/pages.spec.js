@@ -137,3 +137,32 @@ test("Nisbiy Pages aktivlari bitta HTML eksportida ham ichki joylashtiriladi", a
   expect(requests).toEqual([]);
   expect(errors).toEqual([]);
 });
+
+test("Mavjud Pages manba tarmog‘idagi index.html tayyor va mustaqil ishlaydi", async ({
+  page,
+}) => {
+  execFileSync(process.execPath, ["scripts/build-portable.mjs"]);
+  const html = readFileSync("index.html", "utf8");
+  expect(html).toBe(readFileSync("portable/cyber-university.html", "utf8"));
+  expect(existsSync(".nojekyll")).toBe(true);
+  const requests = [],
+    errors = [];
+  page.on("request", (r) => {
+    if (/^https?:/.test(r.url())) requests.push(r.url());
+  });
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.context().setOffline(true);
+  await page.setContent(html);
+  await expect(page.locator(".intro-layout")).toBeVisible();
+  await page.evaluate(() => (location.hash = "#/oqish/12"));
+  await expect(page.locator(".phishing-email")).toContainText(
+    "security-alert@example.invalid",
+  );
+  await expect(page.locator(".phishing-email")).toContainText(
+    "parolingizni tasdiqlang.",
+  );
+  await page.evaluate(() => (location.hash = "#/oqish/14"));
+  await expect(page.locator(".qr")).toBeVisible();
+  expect(requests).toEqual([]);
+  expect(errors).toEqual([]);
+});

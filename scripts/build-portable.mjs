@@ -48,6 +48,8 @@ if (/(?:src|href)="(?:\.\/|\/)?assets\//.test(html))
   throw new Error("Tashqi aktiv qoldi.");
 mkdirSync("portable", { recursive: true });
 writeFileSync("portable/cyber-university.html", html);
+// The repository’s configured Pages source serves this file without a Node build.
+writeFileSync("index.html", html);
 console.log(
   "Tayyor: portable/cyber-university.html — brauzerda ochiladigan bitta fayl.",
 );

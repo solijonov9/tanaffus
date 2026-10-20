@@ -8,10 +8,10 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "test": "playwright test",
-    "format": "prettier --write src tests scripts *.js index.html package.json",
-    "format:check": "prettier --check src tests scripts *.js index.html package.json",
+    "format": "prettier --write src tests scripts *.js seminar-source.html package.json",
+    "format:check": "prettier --check src tests scripts *.js seminar-source.html package.json",
     "build:portable": "npm run build && node scripts/build-portable.mjs",
-    "deploy:pages": "npm run build && node scripts/deploy-pages.mjs",
+    "deploy:pages": "npm run build:portable && node scripts/deploy-pages.mjs",
     "export:materials": "npm run build && node scripts/export-materials.mjs"
   },
   "dependencies": {
