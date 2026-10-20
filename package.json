@@ -10,7 +10,9 @@
     "test": "playwright test",
     "format": "prettier --write src tests scripts *.js index.html package.json",
     "format:check": "prettier --check src tests scripts *.js index.html package.json",
-    "build:portable": "npm run build && node scripts/build-portable.mjs"
+    "build:portable": "npm run build && node scripts/build-portable.mjs",
+    "deploy:pages": "npm run build && node scripts/deploy-pages.mjs",
+    "export:materials": "npm run build && node scripts/export-materials.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

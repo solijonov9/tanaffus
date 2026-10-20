@@ -32,12 +32,12 @@ Taqdimot: ← / →, Home, End va Space. Maydonlar, tugmalar, havolalar va dialo
 
 `src/config.js` ichida quyidagilar bir joyda sozlanadi:
 
-- `publicUrl`: hozir `https://raqamli-ustoz-flow.base44.app`. QR aynan shu manzilni kodlaydi, unga yashirin parametr qo‘shmaydi. Saytni joylashtirganda manzilni haqiqiy, mobil o‘qish ko‘rinishini ochadigan ildiz manzilga moslang va qayta yig‘ing.
+- `publicUrl`: hozir `https://solijonov9.github.io/tanaffus/`. QR aynan shu manzilni kodlaydi, unga yashirin parametr qo‘shmaydi. Saytni joylashtirganda manzilni haqiqiy, mobil o‘qish ko‘rinishini ochadigan ildiz manzilga moslang va qayta yig‘ing.
 - `presenter`: Madaminbek Solijonov.
 - `role`: Kiberxavfsizlik kafedrasi o‘qituvchisi.
 - `seminarDate`: ataylab bo‘sh. Tasdiqlangan tadbir sanasi bo‘lsa kiriting; sayt sana o‘ylab topmaydi.
 
-Hash yo‘llari statik hostingda alohida server marshrutlarini talab qilmaydi. Standart yig‘ish domen ildiziga joylashtirish uchun. Ushbu kodning yozilishi sayt tashqi domenda e’lon qilinganini anglatmaydi. Offline ishlash va xizmat ishchisi qo‘shilmagan.
+Hash yo‘llari statik hostingda alohida server marshrutlarini talab qilmaydi. Yig‘ish nisbiy aktiv yo‘llarini ishlatadi: domen ildizida ham, GitHub Pages’dagi `/tanaffus/` papkasida ham ochiladi. Ushbu kodning yozilishi sayt tashqi domenda e’lon qilinganini anglatmaydi. Offline ishlash va xizmat ishchisi qo‘shilmagan.
 
 ## Simulyatsiya
 
@@ -80,3 +80,23 @@ npm run build:portable
 ```
 
 Natija: `portable/cyber-university.html`. Tayyor HTML fayli kompyuterga olingach, uni brauzerda ikki marta bosib ochish mumkin: Node.js, terminal yoki mahalliy server talab qilinmaydi. Ushbu eksportda JavaScript, CSS, shriftlar va belgi ichki joylashtiriladi. Chromium’da HTML xotiradan yuklanib, internet o‘chirilgan holatda 14 slayd, xat–vazifa–taqvim bog‘lanishi va QR tekshirildi. Ushbu boshqariladigan brauzer file:// ochilishini administrator siyosati bilan cheklagani uchun faylni ikki marta bosib ochish bu muhitda tekshirilmagan. Oddiy `dist/` saytida xizmat ishchisi mavjud emas; bu alohida HTML nusxaning tekshiruvidir. Tashqi sayt havolalari uchun internet kerak. Bu faylni yaratishning o‘zi yuklash havolasi yaratmaydi yoki saytni internetga joylashtirmaydi.
+
+
+## GitHub Pages
+
+Sayt manzili: **https://solijonov9.github.io/tanaffus/**. O‘qish ko‘rinishi shu manzilda, taqdimot `#/taqdimot/1` holatida ochiladi. QR va chop etiladigan qo‘llanma shu manzilni ishlatadi.
+
+Tayyor sayt `gh-pages` tarmog‘ining ildiziga joylashtiriladi. GitHub repozitoriysida **Settings → Pages → Build and deployment → Deploy from a branch → gh-pages → / (root) → Save** tanlanadi. GitHub saytni birinchi marta tayyorlashi bir necha daqiqa olishi mumkin. GitHub Pages yoqilmagan bo‘lsa, faqat fayllarni yuklash hali sayt ochilganini anglatmaydi.
+
+Yangilangan saytni chiqarish:
+
+```sh
+npm run deploy:pages
+```
+
+Buyruq saytni yig‘adi va faqat `gh-pages` tarmog‘iga yuboradi. Alohida vaqtinchalik Git indeksi ishlatiladi; manba fayllari va joriy tarmoq almashtirilmaydi. Mavjud nashrning tarixi saqlanadi; kuch bilan yozish ishlatilmaydi. GitHub’ga yozish huquqi kerak. `node scripts/deploy-pages.mjs --dry-run` GitHub’ni o‘zgartirmasdan tayyorgarlikni tekshiradi.
+
+`tests/pages.spec.js` yig‘ilgan saytni aynan `/tanaffus/` ichida ochib, 14 slayd, aktivlar, mobil navigatsiya, vazifa–taqvim bog‘lanishi, QR va bitta HTML eksportini tekshiradi.
+
+
+Taqdimot va qo‘llanmaning yuklab olinadigan PDF nusxalarini yangi QR manzili bilan qayta yaratish uchun `npm run export:materials` ishlatiladi. Bu buyruq Chromium va Python/PyMuPDF talab qiladi; natijalar `downloads/` ichiga yoziladi. Saytning o‘zi PDF eksporti uchun server yoki ushbu vositalarni talab qilmaydi — foydalanuvchi brauzerning chop etish dialogidan foydalanadi.
